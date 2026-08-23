@@ -121,9 +121,23 @@ stage_deploy(){
     return 0
 
 }
+if [ -z "$STAGE" ]; then
+    run_stage "BUILD" stage_build
+    run_stage "TEST" stage_test
+    run_stage "DEPLOY" stage_deploy
 
-run_stage "Build" stage_build
-run_stage "Test" stage_test
-run_stage "Deploy" stage_deploy
+elif [ "$STAGE" == 'build' ]; then
+    run_stage "Build" stage_build
+
+elif [ "$STAGE" == 'test' ]; then
+    run_stage "Test" stage_test
+
+elif [ "$STAGE" == 'deploy' ]; then
+    run_stage "Deploy" stage_deploy
+
+else
+    echo "Wrong stage name. Please use correct stage name"
+    exit 1
+fi
 
 echo -e "${GREEN} Pipeline completed at $ENV with $TIMESTAMP${NC}"
