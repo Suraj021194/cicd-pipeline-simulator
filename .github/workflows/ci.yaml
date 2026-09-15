@@ -8,3 +8,7 @@ jobs:
       - uses: actions/checkout@v4 
       - name: Run build stage
         run: ./pipeline.sh --stage build
+      - name: Run test stage
+        run: ./pipeline.sh --stage test
+      - name: Run deploy stage
+        run: ./pipeline.sh --stage deploy
