@@ -49,24 +49,24 @@ done
 
 #Layer 2 - run_stage() helper
 
-    run_stage(){
-        local stage_name=$1
-        local stage_func=$2
-        local start_time=$(date +%s)
+run_stage(){
+    local stage_name=$1
+    local stage_func=$2
+    local start_time=$(date +%s)
 
 
-    $stage_func
-    local exit_code=$?
-    local end_time=$(date +%s)
-    local duration=$((end_time-start_time))
-    if [ $exit_code -eq 0 ]; then
-        echo  -e "${GREEN} $stage_name successfully passed and it took $duration seconds ${NC}"
-        echo "$stage_name successfully passed and it took that seconds $duration" >> $LOG_FILE
-    else
-        echo -e "${RED} $stage_name fails and it took $duration seconds ${NC}"
-        echo "$stage_name fails and it took $duration seconds" >> $LOG_FILE
-    fi
-    }
+$stage_func
+local exit_code=$?
+local end_time=$(date +%s)
+local duration=$((end_time-start_time))
+if [ $exit_code -eq 0 ]; then
+    echo  -e "${GREEN} $stage_name successfully passed and it took $duration seconds ${NC}"
+    echo "$stage_name successfully passed and it took that seconds $duration" >> $LOG_FILE
+else
+    echo -e "${RED} $stage_name fails and it took $duration seconds ${NC}"
+    echo "$stage_name fails and it took $duration seconds" >> $LOG_FILE
+fi
+}
 
 stage_build(){
     if [ -d "$APP_DIR" ]; then
