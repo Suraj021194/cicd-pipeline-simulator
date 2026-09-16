@@ -11,11 +11,12 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No color - resets back to Normal
 
 # Config 
-LOG_FILE="$HOME/DevOpsProject/cicd-pipeline/pipeline.log"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+LOG_FILE="$SCRIPT_DIR/pipeline.log"
 TIMESTAMP=$(date +'%Y-%m-%d_%H-%M-%S')
 ENV="development" #default environment
 STAGE=""
-APP_DIR="$HOME/DevOpsProject/cicd-pipeline/myapp"
+APP_DIR="$SCRIPT/myapp"
 
 usage(){
     # print usgae instructions for --stage, --env, --help
