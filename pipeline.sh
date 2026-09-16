@@ -67,6 +67,7 @@ else
     echo -e "${RED} $stage_name fails and it took $duration seconds ${NC}"
     echo "$stage_name fails and it took $duration seconds" >> $LOG_FILE
 fi
+retrun $exit_code
 }
 
 stage_build(){
