@@ -125,17 +125,35 @@ stage_deploy(){
 }
 if [ -z "$STAGE" ]; then
     run_stage "BUILD" stage_build
+    if [ $? -ne 0 ]; then
+        exit 1
+    fi
     run_stage "TEST" stage_test
+    if [ $? -ne 0 ]; then
+        exit 1
+    fi
     run_stage "DEPLOY" stage_deploy
-
+    if [ $? -ne 0 ]; then
+        exit 1
+    fi
 elif [ "$STAGE" == 'build' ]; then
     run_stage "Build" stage_build
+    if [ $? -ne 0 ]; then 
+        exit 1
+    fi
+
 
 elif [ "$STAGE" == 'test' ]; then
     run_stage "Test" stage_test
+    if [ $? -ne 0 ]; then
+        exit 1
+    fi
 
 elif [ "$STAGE" == 'deploy' ]; then
     run_stage "Deploy" stage_deploy
+    if [ $? -ne 0 ]; then
+        exit 1
+    fi
 
 else
     echo "Wrong stage name. Please use correct stage name"
