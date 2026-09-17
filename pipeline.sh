@@ -16,7 +16,7 @@ LOG_FILE="$SCRIPT_DIR/pipeline.log"
 TIMESTAMP=$(date +'%Y-%m-%d_%H-%M-%S')
 ENV="development" #default environment
 STAGE=""
-APP_DIR="$SCRIPT_DIR/app/myapp"
+APP_DIR="$SCRIPT_DIR/myapp"
 
 usage(){
     # print usgae instructions for --stage, --env, --help
