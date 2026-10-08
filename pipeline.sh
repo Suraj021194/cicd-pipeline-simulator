@@ -1,4 +1,3 @@
-# layer 1 plan
 #!/bin/bash
 
 set -u
