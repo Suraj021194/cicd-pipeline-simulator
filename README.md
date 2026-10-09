@@ -1,4 +1,5 @@
-# CI/CD Pipeline Simulator
+# CI/CD Pipeline Simulator 
+# We have also added jenkins
 
 A Bash script that simulates a CI/CD pipeline with Build, Test, and Deploy stages — including colored output, timing, and logging for each stage. Also wired into a real, automated GitHub Actions workflow.
 
