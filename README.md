@@ -37,3 +37,23 @@ Every push to `main` automatically triggers `.github/workflows/ci.yaml`, which c
 out the repo and runs all three stages (`build`, `test`, `deploy`) on a GitHub-hosted 
 runner. A failing stage correctly fails the workflow and blocks later stages — this 
 is driven by the script's real exit code, not just its printed output.
+
+## Jenkins
+The same pipeline also runs under Jenkins through the `Jenkinsfile` at the repo root. It has three stages (Build, Test, Deploy), and each calls `./pipeline.sh --stage <name>`.
+
+Run Jenkins locally in Docker:
+```bash
+docker run -d --name jenkins -p 8080:8080 -p 50000:50000 \
+  -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts
+```
+
+Create a Pipeline job with these settings:
+- Definition: Pipeline script from SCM
+- SCM: Git, with this repository's URL
+- Branch Specifier: `*/main`
+- Script Path: `Jenkinsfile`
+- Optional: enable Poll SCM (for example `H/5 * * * *`) to build automatically on new commits
+
+Notes:
+- `pipeline.sh` must have `#!/bin/bash` on **line 1**. Jenkins' `sh` step uses `/bin/sh`, so a misplaced shebang breaks bash-only syntax such as `==` inside `[ ]`.
+- GitHub webhooks cannot reach a Jenkins on `localhost`, so Poll SCM is used for local setups.
